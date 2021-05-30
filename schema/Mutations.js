@@ -6,6 +6,7 @@ const {
   GraphQLString,
   GraphQLBoolean,
 } = require("graphql");
+const mongoose = require("mongoose");
 // Import files and functions
 const {
   UserType,
@@ -13,11 +14,12 @@ const {
   TenantType,
   HouseType,
   MRType,
+  MRInputType,
 } = require("./Typedef");
 const User = require("../mongoSchema/User");
 const Tenant = require("../mongoSchema/Tenant");
 const House = require("../mongoSchema/House");
-const MeterReading = require("../mongoSchema/MeterReading")
+const MeterReading = require("../mongoSchema/MeterReading");
 
 const Mutation = new GraphQLObjectType({
   name: "MutationQuery",
@@ -113,6 +115,21 @@ const Mutation = new GraphQLObjectType({
         const res = await newReading.save();
         console.log(res);
         return res;
+      },
+    },
+    addReadingsBulk: {
+      type: new GraphQLList(MRType),
+      description: "Add meter readings in bulk.",
+      args: {
+        readings: { type: new GraphQLList(MRInputType) },
+      },
+      resolve: async (parent, args) => {
+        try {
+          const res = await MeterReading.insertMany(args.readings);
+          return res;
+        } catch (err) {
+          console.log("An error occured on BulkInsert \n", err);
+        }
       },
     },
   },

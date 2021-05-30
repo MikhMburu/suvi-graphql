@@ -99,6 +99,22 @@ const MRType = new GraphQLObjectType({
   }),
 });
 
+// Meter Reading Input
+const MRInputType = new GraphQLInputObjectType({
+  name: "meter_reading_bulk",
+  description: "Meter Readings taken in bulk every beginning of the month.",
+  fields: () => ({
+    _id: { type: GraphQLString },
+    tenant: { type: GraphQLString },
+    date: {
+      type: GraphQLString,
+    },
+    reading: {
+      type: GraphQLFloat,
+    },
+  }),
+});
+
 const HouseType = new GraphQLObjectType({
   name: "House",
   description: "Houses in the building that are tenant residences",
@@ -110,4 +126,11 @@ const HouseType = new GraphQLObjectType({
 });
 
 // Export variables/functions
-module.exports = { UserType, NOKInputType, TenantType, MRType, HouseType };
+module.exports = {
+  UserType,
+  NOKInputType,
+  TenantType,
+  MRType,
+  HouseType,
+  MRInputType,
+};

@@ -74,7 +74,7 @@ const RootQuery = new GraphQLObjectType({
         return res;
       },
     },
-    getMeterReadings: {
+    getAllMeterReadings: {
       type: new GraphQLList(MRType),
       description: "Gets all readings ever made",
       resolve: async (parent, args) => {
@@ -91,4 +91,4 @@ const RootQuery = new GraphQLObjectType({
   },
 });
 
-module.exports = RootQuery
+module.exports = RootQuery;
