@@ -23,6 +23,7 @@ const MeterReading = require("../mongoSchema/MeterReading");
 const RootQuery = new GraphQLObjectType({
   name: "RootQuery",
   fields: {
+    // Tenants
     getAllActiveTenants: {
       type: new GraphQLList(TenantType),
       description:
@@ -33,6 +34,17 @@ const RootQuery = new GraphQLObjectType({
         return res;
       },
     },
+    getAllDepartedTenants: {
+      type: new GraphQLList(TenantType),
+      description:
+        "A list of all tenants currently living in SunnyView Apartments",
+      async resolve(parent, args) {
+        const res = await Tenant.find({ status: "departed" }).populate("user");
+        // console.log(res);
+        return res;
+      },
+    },
+    // Users
     getAllUsers: {
       type: new GraphQLList(UserType),
       description: "Gets all users in the system. Admins only can call this",
@@ -66,6 +78,8 @@ const RootQuery = new GraphQLObjectType({
         return res[0];
       },
     },
+
+    // Houses
     getAllHouses: {
       type: new GraphQLList(HouseType),
       description: "List of all the houses in the SUVIMIS",
@@ -74,6 +88,8 @@ const RootQuery = new GraphQLObjectType({
         return res;
       },
     },
+
+    // Meter Readings
     getAllMeterReadings: {
       type: new GraphQLList(MRType),
       description: "Gets all readings ever made",

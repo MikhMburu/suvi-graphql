@@ -48,6 +48,20 @@ const UserType = new GraphQLObjectType({
     next_of_kin: { type: NOKType },
   }),
 });
+const UserInputType = new GraphQLInputObjectType({
+  name: "User_Input",
+  fields: () => ({
+    first_name: { type: GraphQLString },
+    other_names: { type: GraphQLString },
+    national_id: { type: GraphQLString },
+    designation: { type: GraphQLString },
+    username: { type: GraphQLString },
+    password: { type: GraphQLString },
+    email: { type: new GraphQLList(GraphQLString) },
+    phone: { type: new GraphQLList(GraphQLString) },
+    next_of_kin: { type: NOKInputType },
+  }),
+});
 
 // Tenant
 const TenantType = new GraphQLObjectType({
@@ -104,7 +118,6 @@ const MRInputType = new GraphQLInputObjectType({
   name: "meter_reading_bulk",
   description: "Meter Readings taken in bulk every beginning of the month.",
   fields: () => ({
-    _id: { type: GraphQLString },
     tenant: { type: GraphQLString },
     date: {
       type: GraphQLString,
@@ -133,4 +146,5 @@ module.exports = {
   MRType,
   HouseType,
   MRInputType,
+  UserInputType,
 };

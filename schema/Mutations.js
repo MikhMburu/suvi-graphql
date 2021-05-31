@@ -15,6 +15,7 @@ const {
   HouseType,
   MRType,
   MRInputType,
+  UserInputType,
 } = require("./Typedef");
 const User = require("../mongoSchema/User");
 const Tenant = require("../mongoSchema/Tenant");
@@ -24,6 +25,7 @@ const MeterReading = require("../mongoSchema/MeterReading");
 const Mutation = new GraphQLObjectType({
   name: "MutationQuery",
   fields: {
+    // Users
     createUser: {
       type: UserType,
       description: "Creates a user in the system",
@@ -54,6 +56,7 @@ const Mutation = new GraphQLObjectType({
         return res;
       },
     },
+    // Tenants
     createTenant: {
       type: TenantType,
       description: "Creates a tenant from the available users",
@@ -75,10 +78,42 @@ const Mutation = new GraphQLObjectType({
           checkout: args.checkout,
         });
         const res = await newTenant.save();
-        console.log(res);
         return res;
       },
     },
+    createUserTenant: {
+      type: TenantType,
+      description:
+        "Add a user and a tenant at the same time. Most common use case in the system",
+      args: {
+        user: { type: UserInputType },
+        hseno: { type: GraphQLInt },
+        checkin: { type: GraphQLString },
+        rent: { type: GraphQLInt },
+        status: { type: GraphQLString },
+        checkout: { type: GraphQLString },
+      },
+      resolve: async (parent, args) => {
+        try {
+          const newUser = new User(args.user);
+          if (newUser) {
+            const newTenant = new Tenant({
+              user: newUser._id,
+              hseno: args.hseno,
+              checkin: args.checkin,
+              rent: args.rent,
+              status: args.status,
+            });
+            await newUser.save();
+            const res = await newTenant.save();
+            return res;
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      },
+    },
+    // Houses
     addHouse: {
       type: HouseType,
       description: "Add a house to be managed by SUVIMIS",
@@ -97,6 +132,7 @@ const Mutation = new GraphQLObjectType({
         return res;
       },
     },
+    // Meter Readings
     addReading: {
       type: MRType,
       description: "Add a meter reading.",
