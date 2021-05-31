@@ -6,7 +6,6 @@ const {
   GraphQLString,
   GraphQLBoolean,
 } = require("graphql");
-const mongoose = require("mongoose");
 // Import files and functions
 const {
   UserType,
@@ -68,7 +67,7 @@ const Mutation = new GraphQLObjectType({
         status: { type: GraphQLString },
         checkout: { type: GraphQLString },
       },
-      async resolve(parent, args) {
+      resolve: async (parent, args) => {
         const newTenant = new Tenant({
           user: args.user,
           hseno: args.hseno,
