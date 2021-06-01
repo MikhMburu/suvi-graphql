@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const TenantContainer = (props) => {
+const UserContainer = (props) => {
   return (
     <section id="team" className="team">
       <div className="container">
@@ -14,4 +14,4 @@ const TenantContainer = (props) => {
   );
 };
 
-export default TenantContainer;
+export default UserContainer;

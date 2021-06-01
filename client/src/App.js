@@ -7,6 +7,9 @@ import Header from "./components/layout/Header";
 import Dashboard from "./components/pages/Dashboard";
 import Tenants from "./components//pages/Tenants";
 import Users from "./components/pages/Users";
+import AddUsers from "./components/pages/AddUser";
+import AddTenant from "./components/pages/AddTenant";
+import MeterReading from "./components/pages/MeterReading";
 
 function App() {
   return (
@@ -22,11 +25,17 @@ function App() {
         <Route path="/users">
           <Users />
         </Route>
+        <Route path="/add-user">
+          <AddUsers />
+        </Route>
+        <Route path="/add-tenant">
+          <AddTenant />
+        </Route>
         <Route path="/houses">
           <h1>Houses</h1>
         </Route>
         <Route path="/meter-reading">
-          <h1>Meter Readings</h1>
+          <MeterReading />
         </Route>
       </Switch>
     </Router>
