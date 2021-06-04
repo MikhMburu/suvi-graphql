@@ -1,6 +1,6 @@
 import React from "react";
 
-const PersonalDetails = () => {
+const PersonalDetails = ({ onChange }) => {
   return (
     <div className="col-md-6 shadow-sm">
       <h4 className="text-primary">Personal Details</h4>
@@ -9,10 +9,18 @@ const PersonalDetails = () => {
         <span className="input-group-text">
           <i className="bx bx-user"></i>
         </span>
-        <input type="text" placeholder="First name" className="form-control" />
         <input
           type="text"
+          name="first_name"
+          onChange={onChange}
+          placeholder="First name"
+          className="form-control"
+        />
+        <input
+          type="text"
+          name="other_names"
           placeholder="Other names"
+          onChange={onChange}
           className="form-control text-capitalize"
         />
       </div>
@@ -22,6 +30,8 @@ const PersonalDetails = () => {
         </span>
         <input
           type="text"
+          name="nat_id"
+          onChange={onChange}
           placeholder="National/ Passport ID"
           className="form-control"
         />

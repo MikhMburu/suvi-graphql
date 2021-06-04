@@ -1,6 +1,6 @@
 import React from "react";
 
-const ContactDetails = () => {
+const ContactDetails = ({ onChange }) => {
   return (
     <div className="col-md-6 shadow-sm">
       <h4 className="text-primary">Contact Details</h4>
@@ -14,6 +14,7 @@ const ContactDetails = () => {
           name="email"
           placeholder="Seperate emails with a comma"
           className="form-control"
+          onChange={onChange}
         />
       </div>
       <div className="input-group mb-2">
@@ -23,6 +24,7 @@ const ContactDetails = () => {
         <input
           type="tel"
           name="phoneno"
+          onChange={onChange}
           placeholder="Seperate phone numbers with a comma"
           className="form-control"
         />

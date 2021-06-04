@@ -1,0 +1,9 @@
+export const LOAD_MY_PROFILE = "LOAD_MY_PROFILE";
+export const LOADING = "LOADING";
+export const LOAD_USERS = "LOAD_USERS";
+export const SELECT_USER = "SELECT_USER";
+export const LOAD_TENANTS = "LOAD_TENANTS";
+export const SELECT_TENANT = "SELECT_TENANT";
+export const LOAD_PREV_READINGS = "LOAD_PREV_READINGS";
+export const READ_METERS = "READ_METERS";
+export const POST_CONSUMPTION = "POST_CONSUMPTION";

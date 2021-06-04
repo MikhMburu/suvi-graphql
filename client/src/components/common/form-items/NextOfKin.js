@@ -1,6 +1,6 @@
 import React from "react";
 
-const NextOfKin = () => {
+const NextOfKin = ({ onChange }) => {
   return (
     <div className="col-md-6 shadow-sm">
       <h4 className="text-primary">Next Of Kin</h4>
@@ -9,14 +9,32 @@ const NextOfKin = () => {
         <span className="input-group-text">
           <i className="bx bx-user"></i>
         </span>
-        <input type="text" placeholder="First Name" className="form-control" />
-        <input type="text" placeholder="Other Names" className="form-control" />
+        <input
+          type="text"
+          name="nok_fname"
+          onChange={onChange}
+          placeholder="First Name"
+          className="form-control"
+        />
+        <input
+          type="text"
+          name="nok_otherNames"
+          onChange={onChange}
+          placeholder="Other Names"
+          className="form-control"
+        />
       </div>
       <div className="input-group mb-2">
         <span className="input-group-text">
           <i className="bx bx-phone"></i>
         </span>
-        <input type="tel" placeholder="Phone Number" className="form-control" />
+        <input
+          type="tel"
+          name="nok_phoneno"
+          onChange={onChange}
+          placeholder="Phone Number"
+          className="form-control"
+        />
       </div>
       <div className="input-group mb-2">
         <span className="input-group-text">
@@ -24,6 +42,8 @@ const NextOfKin = () => {
         </span>
         <input
           type="email"
+          name="nok_email"
+          onChange={onChange}
           placeholder="Email Address"
           className="form-control"
         />

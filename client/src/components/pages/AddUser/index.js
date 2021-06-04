@@ -1,5 +1,5 @@
 // Import libraries
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 // Import components
 import Breadcrumbs from "../../layout/Breadcrumbs";
 import AddUserContainer from "./AddUserContainer";
@@ -10,18 +10,26 @@ import NextOfKin from "../../common/form-items/NextOfKin";
 import SubmitButton from "../../common/form-items/SubmitButton";
 
 const AddUser = () => {
+  const [user, setUser] = useState(null);
+  const onChangeHandler = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    console.log(user);
+  };
   return (
     <Fragment>
       <Breadcrumbs heading="Add User" />
       <AddUserContainer>
-        <form>
+        <form onSubmit={onSubmitHandler}>
           <div className="row">
-            <PersonalDetails />
-            <ContactDetails />
+            <PersonalDetails onChange={onChangeHandler} />
+            <ContactDetails onChange={onChangeHandler} />
           </div>
           <div className="row">
-            <Designation />
-            <NextOfKin />
+            <Designation onChange={onChangeHandler} />
+            <NextOfKin onChange={onChangeHandler} />
           </div>
           <div className="row">
             <SubmitButton />

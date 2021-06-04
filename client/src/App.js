@@ -1,7 +1,6 @@
 // Import libraries
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // Import files
-import "./App.css";
 // Import components/pages
 import Header from "./components/layout/Header";
 import Dashboard from "./components/pages/Dashboard";

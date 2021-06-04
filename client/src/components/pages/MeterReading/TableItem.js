@@ -1,11 +1,11 @@
 import React from "react";
 
-const TableItem = () => {
+const TableItem = ({ onChange, name }) => {
   return (
     <tr>
       <th scope="row">#1</th>
       <td>
-        <input name="1" type="text" />
+        <input name={name} type="text" onChange={onChange} />
       </td>
     </tr>
   );
