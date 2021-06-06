@@ -1,5 +1,7 @@
 // Import libraries
 import React, { Fragment, useState } from "react";
+import { useMutation } from "@apollo/client";
+import { CREATE_USER_GQL } from "../../../GraphQL/Mutations";
 // Import components
 import Breadcrumbs from "../../layout/Breadcrumbs";
 import AddUserContainer from "./AddUserContainer";
@@ -14,8 +16,40 @@ const AddUser = () => {
   const onChangeHandler = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
+  const [createUser, { error }] = useMutation(CREATE_USER_GQL);
   const onSubmitHandler = (e) => {
     e.preventDefault();
+    if (user) {
+      const {
+        first_name,
+        other_names,
+        nat_id,
+        email,
+        phoneno,
+        designation,
+        username,
+        pswd,
+        nok_name,
+        nok_email,
+        nok_phoneno,
+      } = user;
+
+      createUser({
+        variables: {
+          first_name: first_name,
+          other_names: other_names,
+          national_id: nat_id,
+          designation: designation,
+          username: username,
+          password: pswd,
+          email: email.trim().split(","),
+          phone: phoneno.trim().split(","),
+          nok_name: nok_name,
+          nok_email: nok_email,
+          nok_phone: nok_phoneno,
+        },
+      });
+    }
     console.log(user);
   };
   return (

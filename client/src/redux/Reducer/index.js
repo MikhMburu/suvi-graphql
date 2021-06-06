@@ -3,14 +3,32 @@ import { combineReducers } from "redux";
 import TenantReducer from "./Tenants";
 import UserReducer from "./Users";
 import MeterReadingReducer from "./MeterReadings";
+// Import types
+import { LOADING, SIGN_IN, SIGN_OUT } from "../types";
 
 const initialState = {
-  isLoggedIn: true,
+  isAuthenticated: false,
   loading: false,
+  user: {},
 };
 
 const mainReducer = (state = initialState, action) => {
   switch (action.state) {
+    case SIGN_IN:
+      return {
+        ...state,
+        user: action.payload,
+      };
+    case LOADING:
+      return {
+        ...state,
+        loading: true,
+      };
+    case SIGN_OUT:
+      return {
+        ...state,
+        user: {},
+      };
     default:
       return state;
   }

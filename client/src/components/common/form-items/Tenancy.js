@@ -11,14 +11,7 @@ const Tenancy = ({ onChange }) => {
           type="number"
           name="hseno"
           onChange={onChange}
-          placeholder="House"
-          className="form-control"
-        />
-        <input
-          type="number"
-          name="meter_reading"
-          onChange={onChange}
-          placeholder="Initial Meter Reading"
+          placeholder="House Number"
           className="form-control"
         />
       </div>

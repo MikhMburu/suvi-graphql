@@ -11,16 +11,9 @@ const NextOfKin = ({ onChange }) => {
         </span>
         <input
           type="text"
-          name="nok_fname"
+          name="nok_name"
           onChange={onChange}
-          placeholder="First Name"
-          className="form-control"
-        />
-        <input
-          type="text"
-          name="nok_otherNames"
-          onChange={onChange}
-          placeholder="Other Names"
+          placeholder="Kin's Name"
           className="form-control"
         />
       </div>

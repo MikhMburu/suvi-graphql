@@ -1,7 +1,7 @@
 import React from "react";
 
 const TableContainer = (props) => {
-  const { onChange, children } = props;
+  const { setDate, children } = props;
   return (
     <table>
       <thead>
@@ -14,9 +14,13 @@ const TableContainer = (props) => {
       <tbody>
         <tr>
           <th scope="row">Date</th>
-          {/* <td>
-            <input name="date_of_reading" onChange={onChange} type="date" />
-          </td> */}
+          <td>
+            <input
+              name="date_of_reading"
+              onChange={(e) => setDate(e.target.value)}
+              type="date"
+            />
+          </td>
         </tr>
         {children}
         <tr>

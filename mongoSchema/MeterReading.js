@@ -6,9 +6,8 @@ const MReadingSchema = new Schema({
     ref: "tenant",
   },
   date: {
-    type: Date,
+    type: String,
     required: true,
-    default: Date.now,
   },
   reading: {
     type: Number,

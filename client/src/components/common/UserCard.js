@@ -1,10 +1,15 @@
 import React from "react";
 
-const UserCard = () => {
+const UserCard = ({ tenant }) => {
+  if (tenant) {
+    const {
+      user: { first_name, other_names },
+    } = tenant;
+  }
   return (
     <div className="col-lg-4 col-md-6 d-flex align-items-stretch">
       <div className="member">
-        <h4>Walter White</h4>
+        <h4>Michael N</h4>
         <span>Chief Executive Officer</span>
         <p>
           Magni qui quod omnis unde et eos fuga et exercitationem. Odio
