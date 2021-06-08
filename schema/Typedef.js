@@ -17,7 +17,7 @@ const NOKType = new GraphQLObjectType({
   name: "next_of_kin",
   fields: () => ({
     name: { type: GraphQLString },
-    email: { type: GraphQLString },
+    relation: { type: GraphQLString },
     phone: { type: GraphQLString },
   }),
 });
@@ -26,7 +26,7 @@ const NOKInputType = new GraphQLInputObjectType({
   name: "nok_input",
   fields: () => ({
     name: { type: GraphQLString },
-    email: { type: GraphQLString },
+    relation: { type: GraphQLString },
     phone: { type: GraphQLString },
   }),
 });
@@ -43,6 +43,7 @@ const UserType = new GraphQLObjectType({
     designation: { type: GraphQLString },
     username: { type: GraphQLString },
     password: { type: GraphQLString },
+    description: { type: GraphQLString },
     email: { type: new GraphQLList(GraphQLString) },
     phone: { type: new GraphQLList(GraphQLString) },
     next_of_kin: { type: NOKType },
@@ -59,6 +60,7 @@ const UserInputType = new GraphQLInputObjectType({
     password: { type: GraphQLString },
     email: { type: new GraphQLList(GraphQLString) },
     phone: { type: new GraphQLList(GraphQLString) },
+    description: { type: GraphQLString },
     next_of_kin: { type: NOKInputType },
   }),
 });

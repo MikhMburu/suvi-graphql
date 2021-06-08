@@ -14,7 +14,7 @@ const PersonalDetails = ({ onChange }) => {
           name="first_name"
           onChange={onChange}
           placeholder="First name"
-          className="form-control"
+          className="form-control text-capitalize"
         />
         <input
           type="text"

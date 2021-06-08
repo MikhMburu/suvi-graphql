@@ -19,6 +19,7 @@ const AddUser = () => {
   const onChangeHandler = (e) => {
     setTenant({ ...tenant, [e.target.name]: e.target.value });
   };
+
   const onSubmitHandler = (e) => {
     e.preventDefault();
     if (tenant) {
@@ -33,8 +34,10 @@ const AddUser = () => {
         rent_amt,
         nok_name,
         nok_phoneno,
-        nok_email,
+        nok_relation,
       } = tenant;
+
+      // console.log(capitalize(nok_name));
       createUserTenant({
         variables: {
           first_name: first_name,
@@ -46,12 +49,11 @@ const AddUser = () => {
           checkin: date_of_entry,
           rent: parseInt(rent_amt),
           nok_name: nok_name,
-          nok_email: nok_email,
+          nok_relation: nok_relation,
           nok_phone: nok_phoneno,
         },
       });
     }
-    console.log(tenant);
   };
   return (
     <Fragment>

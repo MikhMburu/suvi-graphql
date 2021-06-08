@@ -10,7 +10,7 @@ const ContactDetails = ({ onChange }) => {
           <i className="bx bx-envelope"></i>
         </span>
         <input
-          type="email"
+          type="text"
           name="email"
           placeholder="Seperate emails with a comma"
           className="form-control"

@@ -11,7 +11,7 @@ const TenantSchema = new Schema({
     required: true,
   },
   checkin: {
-    type: Date,
+    type: String,
     required: true,
   },
   status: {
@@ -23,7 +23,7 @@ const TenantSchema = new Schema({
     default: 0,
   },
   checkout: {
-    type: Date,
+    type: String,
   },
 });
 module.exports = Tenant = model("tenant", TenantSchema);

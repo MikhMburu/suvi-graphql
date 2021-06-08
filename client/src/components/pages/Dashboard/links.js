@@ -18,7 +18,7 @@ const links = {
   houses: {
     id: 3,
     icon: "bx bx-hotel",
-    header: "Users/Admins",
+    header: "Houses",
     linkTo: "/houses",
     description: "Details about the house units in SunnyView",
   },

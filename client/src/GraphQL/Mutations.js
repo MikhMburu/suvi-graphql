@@ -11,7 +11,7 @@ export const CREATE_TENANT_GQL = gql`
     $email: [String]
     $phone: [String]
     $nok_name: String
-    $nok_email: String
+    $nok_relation: String
     $nok_phone: String
   ) {
     createUserTenant(
@@ -21,7 +21,11 @@ export const CREATE_TENANT_GQL = gql`
         national_id: $national_id
         email: $email
         phone: $phone
-        next_of_kin: { name: $nok_name, email: $nok_email, phone: $nok_phone }
+        next_of_kin: {
+          name: $nok_name
+          relation: $nok_relation
+          phone: $nok_phone
+        }
       }
       hseno: $hseno
       checkin: $checkin
@@ -43,7 +47,7 @@ export const CREATE_USER_GQL = gql`
     $email: [String]
     $phone: [String]
     $nok_name: String
-    $nok_email: String
+    $nok_relation: String
     $nok_phone: String
   ) {
     createUser(
@@ -54,7 +58,11 @@ export const CREATE_USER_GQL = gql`
       phone: $phone
       username: $username
       password: $password
-      next_of_kin: { name: $nok_name, email: $nok_email, phone: $nok_phone }
+      next_of_kin: {
+        name: $nok_name
+        relation: $nok_relation
+        phone: $nok_phone
+      }
     ) {
       first_name
       other_names

@@ -30,9 +30,12 @@ const UserSchema = new Schema({
   phone: {
     type: [String],
   },
+  description: {
+    type: String,
+  },
   next_of_kin: {
     name: { type: String },
-    email: { type: String },
+    relation: { type: String },
     phone: { type: String },
   },
 });

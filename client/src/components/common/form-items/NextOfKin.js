@@ -14,7 +14,7 @@ const NextOfKin = ({ onChange }) => {
           name="nok_name"
           onChange={onChange}
           placeholder="Kin's Name"
-          className="form-control"
+          className="form-control text-capitalize"
         />
       </div>
       <div className="input-group mb-2">
@@ -33,12 +33,13 @@ const NextOfKin = ({ onChange }) => {
         <span className="input-group-text">
           <i className="bx bx-envelope"></i>
         </span>
+
         <input
-          type="email"
-          name="nok_email"
+          type="text"
+          name="nok_relation"
           onChange={onChange}
-          placeholder="Email Address"
-          className="form-control"
+          placeholder="Relation"
+          className="form-control text-capitalize"
         />
       </div>
     </div>

@@ -16,6 +16,7 @@ const AddUser = () => {
   const onChangeHandler = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
+  // eslint-disable-next-line
   const [createUser, { error }] = useMutation(CREATE_USER_GQL);
   const onSubmitHandler = (e) => {
     e.preventDefault();
@@ -30,7 +31,7 @@ const AddUser = () => {
         username,
         pswd,
         nok_name,
-        nok_email,
+        nok_relation,
         nok_phoneno,
       } = user;
 
@@ -45,12 +46,11 @@ const AddUser = () => {
           email: email.trim().split(","),
           phone: phoneno.trim().split(","),
           nok_name: nok_name,
-          nok_email: nok_email,
+          nok_relation: nok_relation,
           nok_phone: nok_phoneno,
         },
       });
     }
-    console.log(user);
   };
   return (
     <Fragment>
