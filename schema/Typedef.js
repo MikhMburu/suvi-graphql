@@ -1,4 +1,5 @@
 // Import Libraries
+const moment = require("moment");
 const {
   GraphQLObjectType,
   GraphQLString,
@@ -88,6 +89,36 @@ const TenantType = new GraphQLObjectType({
     },
     checkout: {
       type: GraphQLString,
+    },
+    current_mreading: {
+      type: MRType,
+      resolve: async (tenant) => {
+        const lastMonthReading = moment()
+          .subtract(1, "months")
+          .endOf("month")
+          .format("YYYY-MM-DD");
+
+        const res = await MeterReading.findOne({
+          tenant: tenant._id,
+          date: lastMonthReading,
+        });
+        return res;
+      },
+    },
+    prev_mreading: {
+      type: MRType,
+      resolve: async (tenant) => {
+        const prevMonthReading = moment()
+          .subtract(2, "months")
+          .endOf("month")
+          .format("YYYY-MM-DD");
+
+        const res = await MeterReading.findOne({
+          tenant: tenant._id,
+          date: prevMonthReading,
+        });
+        return res;
+      },
     },
     meter_readings: {
       type: new GraphQLList(MRType),

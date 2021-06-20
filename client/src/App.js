@@ -11,6 +11,7 @@ import Users from "./components/pages/Users";
 import AddUsers from "./components/pages/AddUser";
 import AddTenant from "./components/pages/AddTenant";
 import MeterReading from "./components/pages/MeterReading";
+import UserProfile from "./components/pages/UserProfile";
 
 function App() {
   return (
@@ -23,6 +24,9 @@ function App() {
           </Route>
           <Route path="/tenants">
             <Tenants />
+          </Route>
+          <Route path="/users/:user" exact>
+            <UserProfile />
           </Route>
           <Route path="/users">
             <Users />

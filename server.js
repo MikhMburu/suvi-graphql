@@ -24,7 +24,7 @@ app.post("/meter-readings", async (req, res) => {
 
   try {
     const result = await MeterReading.insertMany(readings);
-    res.json(result);
+    res.json({ success: true, msg: "Readings successfully inserted" });
   } catch (err) {
     console.log("An error occured on BulkInsert \n", err);
   }

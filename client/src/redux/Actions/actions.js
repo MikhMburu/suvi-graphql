@@ -1,5 +1,13 @@
 // Import files and functions
-import { LOADING, LOAD_TENANTS, SET_OCCUPIED_HOUSES } from "../types";
+import {
+  LOADING,
+  LOAD_TENANTS,
+  SET_OCCUPIED_HOUSES,
+  SELECT_TENANT,
+  LOAD_CONSUMPTION,
+  CALL_CONSUMPTION,
+  STOP_LOADING,
+} from "../types";
 
 // Define actions
 // Data loading?
@@ -25,6 +33,42 @@ export const loadTenants = (data) => {
     dispatch({
       type: LOAD_TENANTS,
       payload: data,
+    });
+  };
+};
+
+// Load a single tenant
+export const loadATenant = (data) => {
+  return (dispatch) => {
+    dispatch({
+      type: SELECT_TENANT,
+      payload: data,
+    });
+  };
+};
+
+// Load tenant consumption for the neter reading page
+export const loadSummary = (data) => {
+  return (dispatch) => {
+    dispatch({
+      type: LOAD_CONSUMPTION,
+      payload: data,
+    });
+  };
+};
+
+export const callConsumption = () => {
+  return (dispatch) => {
+    dispatch({
+      type: CALL_CONSUMPTION,
+    });
+  };
+};
+
+export const stopLoadingConsumption = () => {
+  return (dispatch) => {
+    dispatch({
+      type: STOP_LOADING,
     });
   };
 };

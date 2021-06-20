@@ -27,6 +27,26 @@ export const LOAD_FULL_TENANTS_GQL = gql`
   }
 `;
 
+export const LOAD_TENANTS_CONSUMPTION_GQL = gql`
+  query {
+    getAllActiveTenants {
+      user {
+        first_name
+        other_names
+      }
+      hseno
+      current_mreading {
+        date
+        reading
+      }
+      prev_mreading {
+        date
+        reading
+      }
+    }
+  }
+`;
+
 export const LOAD_TENANTS_FOR_READING_GQL = gql`
   query {
     getAllActiveTenants {

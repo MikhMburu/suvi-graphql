@@ -56,26 +56,17 @@ const RootQuery = new GraphQLObjectType({
     },
     getOneUser: {
       type: UserType,
-      description: "Get one user using one criteria",
+      description: "Get one user using id",
       args: {
         _id: { type: GraphQLString },
-        national_id: { type: GraphQLString },
-        username: { type: GraphQLString },
       },
-      resolve: async (parent, { _id, national_id, username }) => {
+      resolve: async (parent, { _id }) => {
         let res;
         if (_id) {
           res = await User.findById(_id);
           // User.collection.insert()
+          return res[0];
         }
-        if (national_id) {
-          res = await User.find({ national_id });
-        }
-        if (username) {
-          res = await User.find(username);
-        }
-        console.log(res);
-        return res[0];
       },
     },
 
@@ -100,7 +91,6 @@ const RootQuery = new GraphQLObjectType({
             path: "user",
           },
         });
-        console.log(res);
         return res;
       },
     },

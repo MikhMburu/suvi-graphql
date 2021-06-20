@@ -1,11 +1,24 @@
+// Import libraries
 import React, { useState } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { bindActionCreators } from "redux";
+// Import files and functions
+// -------------REDUX
+import { actionCreators } from "../../../redux/Actions";
+// Import Components
 import TableItem from "./TableItem";
 import TableContainer from "./TableContainer";
 
 const SideBar = () => {
+  // ------GraphQL
+  // eslint-disable-next-line
+
+  // ------Redux
+  const dispatch = useDispatch();
+  const { callConsumption } = bindActionCreators(actionCreators, dispatch);
   const houses = useSelector((state) => state.readings.occupiedHouses);
+  // ------React State
   const [rdate, setRdate] = useState("");
   const [mreadings, setMreadings] = useState([]);
 
@@ -26,13 +39,19 @@ const SideBar = () => {
             reading: mreadings[item],
           };
         });
-        // console.log("Readings array..\n", readingsArr);
         const res = await axios.post("/meter-readings", readingsArr, {
           headers: {
             "Content-Type": "application/json",
           },
         });
-        console.log(res);
+
+        // res comes back with a success and a msg key
+        if (res.data.success) {
+          alert(res.data.msg);
+          callConsumption();
+
+          // TODO: Get consumption by querying database for previous readings
+        }
       }
     } catch (err) {
       console.log("Error in sending readings..\n", err);
