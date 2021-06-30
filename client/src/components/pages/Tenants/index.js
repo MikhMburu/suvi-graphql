@@ -17,36 +17,29 @@ const Tenants = () => {
   const { loadTenants } = bindActionCreators(actionCreators, dispatch);
   // eslint-disable-next-line
   const { error, loading, data } = useQuery(LOAD_FULL_TENANTS_GQL);
+  const tenants = useSelector((state) => state.tenant.tenants);
   useEffect(() => {
     if (data) {
       loadTenants(data.getAllActiveTenants);
     }
-    // console.log(data.getAllActiveTenants);
     // eslint-disable-next-line
-  }, [data]);
+  }, [data, tenants]);
 
-  const tenants = useSelector((state) => state.tenant.tenants);
-  console.log(tenants);
   return (
     <Fragment>
       <Breadcrumbs heading="Tenants" />
       <TenantContainer>
         {loading ? (
-          <p>Loading. . .</p>
-        ) : tenants ? (
-          tenants.map((tenant) => {
-            return <UserCard key={tenant._id} tenant={tenant} />;
-          })
-        ) : (
           <Spinner />
-        )}
-        {/* {tenants ? (
+        ) : tenants.length === 0 ? (
+          <h3 className="dispay-4 text-center text-black-50">
+            No tenants to display
+          </h3>
+        ) : (
           tenants.map((tenant) => {
             return <UserCard key={tenant._id} tenant={tenant} />;
           })
-        ) : (
-          <p>No tenants to show</p>
-        )} */}
+        )}
       </TenantContainer>
     </Fragment>
   );

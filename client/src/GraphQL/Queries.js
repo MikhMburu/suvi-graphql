@@ -36,10 +36,12 @@ export const LOAD_TENANTS_CONSUMPTION_GQL = gql`
       }
       hseno
       current_mreading {
-        date
         reading
       }
       prev_mreading {
+        reading
+      }
+      meter_readings {
         date
         reading
       }

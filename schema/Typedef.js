@@ -102,6 +102,7 @@ const TenantType = new GraphQLObjectType({
           tenant: tenant._id,
           date: lastMonthReading,
         });
+
         return res;
       },
     },

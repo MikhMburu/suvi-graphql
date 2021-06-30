@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { ApolloProvider } from "@apollo/client";
 // Import files
 import client from "./GraphQL/client";
+import "../node_modules/bootstrap/dist/js/bootstrap.min";
 // Import components/pages
 import Header from "./components/layout/Header";
 import Dashboard from "./components/pages/Dashboard";

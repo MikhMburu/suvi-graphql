@@ -1,14 +1,49 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { bindActionCreators } from "redux";
+import { actionCreators } from "../../../redux/Actions";
+import { useMutation } from "@apollo/client";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
+import { CHECKOUT_TENANT } from "../../../GraphQL/Mutations";
+import Spinner from "../../common/Spinner";
 
 const MainSection = () => {
+  // ____GraphQL
+  const [checkoutTenant, { error }] = useMutation(CHECKOUT_TENANT);
+  // ____Redux
+  const dispatch = useDispatch();
+  const { checkout } = bindActionCreators(actionCreators, dispatch);
   const tenant = useSelector((state) => state.tenant.selectedTenant);
   if (!tenant) {
-    return <p>Loading. . . </p>;
+    return <Spinner />;
   }
   const {
+    _id,
     user: { first_name, other_names, national_id, email, phone, next_of_kin },
   } = tenant;
+
+  const clickHandler = (e) => {
+    if (error) {
+      return alert(error);
+    }
+    confirmAlert({
+      title: "Checkout",
+      message: "Are you sure you want to check out the tenant?",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => {
+            checkoutTenant({ variables: { _id } });
+            checkout(_id);
+          },
+        },
+        {
+          label: "No",
+        },
+      ],
+    });
+  };
   return (
     <div className="col-md-8">
       <div className="card mb-3 shadow-lg">
@@ -17,7 +52,15 @@ const MainSection = () => {
             <div className="col-sm-3">
               <h6 className="mb-0">Full names</h6>
             </div>
-            <div className="col-sm-9 text-secondary">{`${first_name} ${other_names}`}</div>
+            <div className="col-sm-6 text-secondary">{`${first_name} ${other_names}`}</div>
+            <div className="col-sm-3">
+              <button
+                className="btn btn-danger btn-block"
+                onClick={clickHandler}
+              >
+                Checkout
+              </button>
+            </div>
           </div>
           <hr />
           <div className="row">
@@ -62,18 +105,20 @@ const MainSection = () => {
             <div className="col-sm-9 text-secondary">
               {next_of_kin ? (
                 <table className="table">
-                  <tr>
-                    <th>Name</th>
-                    <td>{next_of_kin.name}</td>
-                  </tr>
-                  <tr>
-                    <th>Phone</th>
-                    <td>{next_of_kin.phone}</td>
-                  </tr>
-                  <tr>
-                    <th>Relation</th>
-                    <td>{next_of_kin.relation}</td>
-                  </tr>
+                  <tbody>
+                    <tr>
+                      <th>Name</th>
+                      <td>{next_of_kin.name}</td>
+                    </tr>
+                    <tr>
+                      <th>Phone</th>
+                      <td>{next_of_kin.phone}</td>
+                    </tr>
+                    <tr>
+                      <th>Relation</th>
+                      <td>{next_of_kin.relation}</td>
+                    </tr>
+                  </tbody>
                 </table>
               ) : (
                 <span className="d-block">No Next of Kin stated</span>

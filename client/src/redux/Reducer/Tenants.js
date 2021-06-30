@@ -1,4 +1,4 @@
-import { LOAD_TENANTS, SELECT_TENANT } from "../types";
+import { LOAD_TENANTS, SELECT_TENANT, CHECKOUT } from "../types";
 const initialState = {
   tenants: [],
   selectedTenant: null,
@@ -17,6 +17,13 @@ const TenantReducer = (state = initialState, action) => {
         selectedTenant: state.tenants.filter(
           (tenant) => tenant._id === action.payload
         )[0],
+      };
+    case CHECKOUT:
+      return {
+        ...state,
+        tenants: state.tenants.filter(
+          (tenant) => tenant._id !== action.payload
+        ),
       };
     default:
       return state;

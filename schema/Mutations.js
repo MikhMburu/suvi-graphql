@@ -16,6 +16,7 @@ const {
   MRInputType,
   UserInputType,
 } = require("./Typedef");
+const moment = require("moment");
 const User = require("../mongoSchema/User");
 const Tenant = require("../mongoSchema/Tenant");
 const House = require("../mongoSchema/House");
@@ -105,8 +106,33 @@ const Mutation = new GraphQLObjectType({
             });
             await newUser.save();
             const res = await newTenant.save();
-            return res;
+            return "New Tenant admitted";
           }
+        } catch (err) {
+          console.log(err);
+        }
+      },
+    },
+    checkoutTenant: {
+      type: TenantType,
+      description: "Check out a tenant from the house",
+      args: {
+        _id: { type: GraphQLString },
+      },
+      resolve: async (parent, args) => {
+        try {
+          const res = await Tenant.findByIdAndUpdate(
+            args._id,
+            {
+              $set: {
+                status: "departed",
+                checkout: moment().format("YYYY-MM-DD"),
+              },
+            },
+            { new: true }
+          );
+          res.save();
+          return res;
         } catch (err) {
           console.log(err);
         }

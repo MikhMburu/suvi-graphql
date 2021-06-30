@@ -71,17 +71,16 @@ export const CREATE_USER_GQL = gql`
   }
 `;
 
-export const READ_METERS_GQL = gql`
-  input Readings {
-    tenant: String!
-    date: String!
-    reading: Float
-  }
-
-  mutation addReadingsBulk($readings: [Readings]) {
-    addReadingsBulk(readings: $readings) {
-      readings: tenant
-      reading
+export const CHECKOUT_TENANT = gql`
+  mutation checkoutTenant($_id: String) {
+    checkoutTenant(_id: $_id) {
+      user {
+        first_name
+        other_names
+        national_id
+      }
+      checkin
+      checkout
     }
   }
 `;

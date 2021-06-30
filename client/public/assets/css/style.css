@@ -124,7 +124,7 @@ h6 {
   line-height: 1;
   font-weight: 700;
   letter-spacing: 1px;
-  text-transform: uppercase;
+  text-transform: capitalize;
   font-family: "Poppins", sans-serif;
   border-left: 8px solid #e96b56;
 }
@@ -793,9 +793,9 @@ section {
 .services .icon-box:hover p {
   color: #fff;
 }
-.services table {
+/* .services table {
   margin-left: 10px;
-}
+} */
 
 .services table tbody td:nth-child(3),
 .services table tbody td:nth-child(4) {
@@ -808,14 +808,15 @@ section {
 /* .services table thead th {
   text-align: center;
 } */
-#side-bar {
+/* #side-bar {
   background: #3b3b3b;
   color: #f5f5f5;
   padding: 1rem;
   height: 500px;
   /* width: 340px; */
-  margin-top: -40px;
-}
+/* margin-top: -40px;
+} */
+*/
 
 /*--------------------------------------------------------------
 # Our Clients

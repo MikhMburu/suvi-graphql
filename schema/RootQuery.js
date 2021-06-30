@@ -29,9 +29,12 @@ const RootQuery = new GraphQLObjectType({
       description:
         "A list of all tenants currently living in SunnyView Apartments",
       async resolve(parent, args) {
-        const res = await Tenant.find({ status: "active" }).populate("user");
-        // console.log(res);
-        return res;
+        try {
+          const res = await Tenant.find({ status: "active" }).populate("user");
+          return res;
+        } catch (err) {
+          throw err;
+        }
       },
     },
     getAllDepartedTenants: {

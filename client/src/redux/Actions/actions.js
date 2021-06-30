@@ -7,6 +7,7 @@ import {
   LOAD_CONSUMPTION,
   CALL_CONSUMPTION,
   STOP_LOADING,
+  CHECKOUT,
 } from "../types";
 
 // Define actions
@@ -69,6 +70,15 @@ export const stopLoadingConsumption = () => {
   return (dispatch) => {
     dispatch({
       type: STOP_LOADING,
+    });
+  };
+};
+
+export const checkout = (id) => {
+  return (dispatch) => {
+    dispatch({
+      type: CHECKOUT,
+      payload: id,
     });
   };
 };

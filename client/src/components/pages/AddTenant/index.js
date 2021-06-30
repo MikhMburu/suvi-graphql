@@ -3,6 +3,7 @@ import React, { Fragment, useState } from "react";
 import { useMutation } from "@apollo/client";
 // Import Files
 import { CREATE_TENANT_GQL } from "../../../GraphQL/Mutations";
+import capitalize from "../../../utilities/capitalize";
 // Import components
 import Breadcrumbs from "../../layout/Breadcrumbs";
 import AddUserContainer from "../AddUser/AddUserContainer";
@@ -37,19 +38,18 @@ const AddUser = () => {
         nok_relation,
       } = tenant;
 
-      // console.log(capitalize(nok_name));
       createUserTenant({
         variables: {
-          first_name: first_name,
-          other_names: other_names,
+          first_name: capitalize(first_name),
+          other_names: capitalize(other_names),
           national_id: nat_id,
           email: email.trim().split(","),
           phone: phoneno.trim().split(","),
           hseno: parseInt(hseno),
           checkin: date_of_entry,
           rent: parseInt(rent_amt),
-          nok_name: nok_name,
-          nok_relation: nok_relation,
+          nok_name: capitalize(nok_name),
+          nok_relation: capitalize(nok_relation),
           nok_phone: nok_phoneno,
         },
       });
@@ -65,8 +65,8 @@ const AddUser = () => {
             <ContactDetails onChange={onChangeHandler} />
           </div>
           <div className="row">
-            <Tenancy onChange={onChangeHandler} />
             <NextOfKin onChange={onChangeHandler} />
+            <Tenancy onChange={onChangeHandler} />
           </div>
           <div className="row">
             <SubmitButton />

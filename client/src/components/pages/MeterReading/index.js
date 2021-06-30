@@ -1,5 +1,5 @@
 // Import Libraries
-import React, { useEffect } from "react";
+import React, { useEffect, Fragment } from "react";
 import { useQuery } from "@apollo/client";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -8,9 +8,9 @@ import { LOAD_TENANTS_FOR_READING_GQL } from "../../../GraphQL/Queries";
 import { actionCreators } from "../../../redux/Actions";
 // Import Components
 import Breadcrumbs from "../../layout/Breadcrumbs";
-import SideBar from "./SideBar";
 import DashboardContainer from "../Dashboard/DashboardContainer";
 import SummaryTable from "./SummaryTable";
+import ReadingInput from "./ReadingInput";
 
 const MeterReading = () => {
   // GraphQL query
@@ -28,16 +28,13 @@ const MeterReading = () => {
     // eslint-disable-next-line
   }, [data]);
   return (
-    <div id="main">
+    <Fragment>
       <Breadcrumbs heading="Meter Reading" />
-      <div className="d-md-flex">
-        <SideBar />
-        <DashboardContainer>
-          <p className="lead">Meter readings as at 1st June 2021</p>
-          <SummaryTable />
-        </DashboardContainer>
-      </div>
-    </div>
+      <DashboardContainer>
+        <ReadingInput />
+        <SummaryTable />
+      </DashboardContainer>
+    </Fragment>
   );
 };
 

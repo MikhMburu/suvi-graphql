@@ -8,8 +8,8 @@ const DashBoard = () => {
     <Fragment>
       <Breadcrumbs heading="Dashboard" />
       <DashboardContainer>
-        {Object.keys(links).map((cardLink, i) => {
-          return <CardLink key={i} link={links[cardLink]} />;
+        {Object.keys(links).map((cardLink) => {
+          return <CardLink key={links[cardLink].id} link={links[cardLink]} />;
         })}
       </DashboardContainer>
     </Fragment>
