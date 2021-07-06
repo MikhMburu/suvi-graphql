@@ -11,7 +11,7 @@ const HouseSchema = new Schema({
   },
   occupied: {
     type: Boolean,
-    default: false,
+    default: true,
   },
 });
 module.exports = House = model("house", HouseSchema);

@@ -57,3 +57,23 @@ export const LOAD_TENANTS_FOR_READING_GQL = gql`
     }
   }
 `;
+
+export const LOAD_HOUSES_GQL = gql`
+  query {
+    getAllHouses {
+      hseno
+      kplc_no
+      occupied
+      occupants {
+        _id
+        user {
+          first_name
+          other_names
+        }
+        status
+        checkin
+        checkout
+      }
+    }
+  }
+`;

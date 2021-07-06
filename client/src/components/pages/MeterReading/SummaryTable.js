@@ -16,7 +16,7 @@ const SummaryTable = () => {
   // GraphQL query
   // eslint-disable-next-line
   const { error, loading, data } = useQuery(LOAD_TENANTS_CONSUMPTION_GQL, {
-    fetchPolicy: "cache-and-network",
+    fetchPolicy: "network-only",
   });
   // ------Redux
   const dispatch = useDispatch();
@@ -24,10 +24,8 @@ const SummaryTable = () => {
   const _consumption = [].concat(consumption);
 
   const isLoading = useSelector((state) => state.readings.callingConsumption);
-  const { stopLoadingConsumption, loadSummary } = bindActionCreators(
-    actionCreators,
-    dispatch
-  );
+  const { stopLoadingConsumption, loadSummary, callConsumption } =
+    bindActionCreators(actionCreators, dispatch);
   // React hooks
   useEffect(() => {
     if (isLoading) {
@@ -44,10 +42,12 @@ const SummaryTable = () => {
     if (consumption) {
       stopLoadingConsumption();
     }
-    console.log("Consumption in UseEffect... \n", consumption);
     //eslint-disable-next-line
   }, [consumption]);
-  console.log("Consumption copied into new array... \n", _consumption);
+
+  const clickHandler = () => {
+    callConsumption();
+  };
   return (
     <div className="col-md-10">
       <p className="lead">
@@ -84,7 +84,10 @@ const SummaryTable = () => {
         <tfoot>
           <tr>
             <td colSpan="6">
-              <button className="btn btn-outline-success form-control">
+              <button
+                className="btn btn-outline-success form-control"
+                onClick={clickHandler}
+              >
                 Publish to Invoice
               </button>
             </td>

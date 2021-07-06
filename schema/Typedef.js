@@ -12,6 +12,7 @@ const {
   GraphQLBoolean,
 } = require("graphql");
 const MeterReading = require("../mongoSchema/MeterReading");
+const Tenant = require("../mongoSchema/Tenant");
 
 // Next Of Kin
 const NOKType = new GraphQLObjectType({
@@ -169,6 +170,18 @@ const HouseType = new GraphQLObjectType({
     hseno: { type: GraphQLInt },
     kplc_no: { type: GraphQLString },
     occupied: { type: GraphQLBoolean },
+    occupants: {
+      type: GraphQLList(TenantType),
+      resolve: async (house) => {
+        let res;
+        try {
+          res = await Tenant.find({ hseno: house.hseno }).populate("user");
+        } catch (err) {
+          res = { msg: "Error occured while querying database", error: err };
+        }
+        return res;
+      },
+    },
   }),
 });
 

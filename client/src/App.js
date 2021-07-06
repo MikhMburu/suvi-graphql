@@ -13,6 +13,7 @@ import AddUsers from "./components/pages/AddUser";
 import AddTenant from "./components/pages/AddTenant";
 import MeterReading from "./components/pages/MeterReading";
 import UserProfile from "./components/pages/UserProfile";
+import Houses from "./components/pages/Houses";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/users">
             <Users />
           </Route>
+
           <Route path="/add-user">
             <AddUsers />
           </Route>
@@ -39,7 +41,7 @@ function App() {
             <AddTenant />
           </Route>
           <Route path="/houses">
-            <h1>Houses</h1>
+            <Houses />
           </Route>
           <Route path="/meter-reading">
             <MeterReading />

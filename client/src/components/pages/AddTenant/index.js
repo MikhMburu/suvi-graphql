@@ -53,6 +53,7 @@ const AddUser = () => {
           nok_phone: nok_phoneno,
         },
       });
+      setTenant(null);
     }
   };
   return (

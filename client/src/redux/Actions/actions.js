@@ -8,6 +8,7 @@ import {
   CALL_CONSUMPTION,
   STOP_LOADING,
   CHECKOUT,
+  LOAD_HOUSEDETAILS,
 } from "../types";
 
 // Define actions
@@ -81,4 +82,11 @@ export const checkout = (id) => {
       payload: id,
     });
   };
+};
+
+export const loadHouseDetails = (data) => (dispatch) => {
+  return dispatch({
+    type: LOAD_HOUSEDETAILS,
+    payload: data,
+  });
 };

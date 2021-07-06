@@ -84,3 +84,12 @@ export const CHECKOUT_TENANT = gql`
     }
   }
 `;
+
+export const ADD_HOUSE_GQL = gql`
+  mutation addHouse($hseno: Int, $kplc_no: String, $occupied: Boolean) {
+    addHouse(hseno: $hseno, kplc_no: $kplc_no, occupied: $occupied) {
+      hseno
+      kplc_no
+    }
+  }
+`;

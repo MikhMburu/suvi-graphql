@@ -1,0 +1,28 @@
+.subheading {
+  font-size: 0.8rem;
+}
+.hse {
+  max-width: 20%;
+}
+.hse-form {
+  font-size: 0.85rem;
+}
+.hse-tenant {
+  box-shadow: 2px 5px #9ca1a5b9;
+  border-radius: 10px;
+}
+.hse-tenant .card-header {
+  background-image: linear-gradient(to bottom right, #fefefffb, #e7de62);
+}
+.hse-tenant .card-body {
+  font-size: 0.75rem;
+  color: #360411d9;
+}
+.clickable {
+  cursor: pointer;
+  color: #f5f5f5;
+}
+.clickable:hover {
+  font-size: 1.1rem;
+  transition: font-size 0.1s;
+}

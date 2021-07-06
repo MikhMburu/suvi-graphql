@@ -3,6 +3,7 @@ import { combineReducers } from "redux";
 import TenantReducer from "./Tenants";
 import UserReducer from "./Users";
 import MeterReadingReducer from "./MeterReadings";
+import HouseReducer from "./Houses";
 // Import types
 import { LOADING, SIGN_IN, SIGN_OUT } from "../types";
 
@@ -39,6 +40,7 @@ const rootReducer = combineReducers({
   user: UserReducer,
   tenant: TenantReducer,
   readings: MeterReadingReducer,
+  house: HouseReducer,
 });
 
 export default rootReducer;
