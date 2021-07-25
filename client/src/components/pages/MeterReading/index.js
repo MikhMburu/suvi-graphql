@@ -10,7 +10,7 @@ import { actionCreators } from "../../../redux/Actions";
 import Breadcrumbs from "../../layout/Breadcrumbs";
 import DashboardContainer from "../Dashboard/DashboardContainer";
 import SummaryTable from "./SummaryTable";
-import ReadingInput from "./ReadingInput";
+import MRSidebar from "./MRSidebar";
 
 const MeterReading = () => {
   // GraphQL query
@@ -31,7 +31,7 @@ const MeterReading = () => {
     <Fragment>
       <Breadcrumbs heading="Meter Reading" />
       <DashboardContainer>
-        <ReadingInput />
+        <MRSidebar />
         <SummaryTable />
       </DashboardContainer>
     </Fragment>

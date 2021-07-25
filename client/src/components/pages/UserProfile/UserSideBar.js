@@ -12,6 +12,7 @@ const UserSideBar = () => {
     hseno,
     rent,
     checkin,
+    checkout,
   } = tenant;
   return (
     <div className="col-md-4 mb-3">
@@ -30,6 +31,11 @@ const UserSideBar = () => {
               <span className="small card-text d-block">
                 From <Moment format="MMM Do YYYY">{checkin}</Moment>
               </span>
+              {checkout && (
+                <span className="small card-text d-block">
+                  To <Moment format="MMM Do YYYY">{checkout}</Moment>
+                </span>
+              )}
               <span className="small card-text d-block">Rent: Ksh {rent}</span>
               <div className="d-grid gap-2">
                 <button className="btn btn-primary" type="button">

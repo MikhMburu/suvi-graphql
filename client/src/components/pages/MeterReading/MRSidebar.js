@@ -1,29 +1,24 @@
 // Import libraries
 import React, { useState, useEffect } from "react";
-import { useMutation } from "@apollo/client";
-import axios from "axios";
-import { useSelector, useDispatch } from "react-redux";
-import { bindActionCreators } from "redux";
 import moment from "moment";
-// Import files and functions
-import { BULK_READINGS_GQL } from "../../../GraphQL/Mutations";
-// ---------REDUX
-import { actionCreators } from "../../../redux/Actions";
-// Import Components
+import { useQuery, useLazyQuery } from "@apollo/client";
+import axios from "axios";
+import { confirmAlert } from "react-confirm-alert";
+// Import Files and functions
+import isEmpty from "../../../utilities/isEmpty";
+import {
+  LOAD_TENANTS_FOR_READING_GQL,
+  LOAD_TENANTS_CONSUMPTION_GQL,
+} from "../../../GraphQL/Queries";
+// Import components
+import Spinner from "../../common/Spinner";
 import InputItem from "./InputItem";
 
-const ReadingInput = () => {
-  // ------GraphQL
-  const [addReadingsBulk, { error, loading }] = useMutation(BULK_READINGS_GQL);
-  // ------Redux
-  const dispatch = useDispatch();
-  const { callConsumption } = bindActionCreators(actionCreators, dispatch);
-  const houses = useSelector((state) => state.readings.occupiedHouses);
-  const _houses = [].concat(houses);
-  // ------React State
+const MRSidebar = () => {
+  // _____React State
   const [rdate, setRdate] = useState("");
   const [mreadings, setMreadings] = useState([]);
-  // ------Effect
+  // _____React Effect
   useEffect(() => {
     /*
         Meter readings are made at either the end of month or beginning of the month. The system should, however, reflect end month as the input date, hence:
@@ -46,13 +41,7 @@ const ReadingInput = () => {
 
     // eslint-disable-next-line
   }, []);
-
-  const onChangeHandler = (e) => {
-    setMreadings({
-      ...mreadings,
-      [e.target.name]: e.target.value,
-    });
-  };
+  // _____Functions
   const onSubmitHandler = async (e) => {
     try {
       e.preventDefault();
@@ -66,11 +55,6 @@ const ReadingInput = () => {
           };
         });
 
-        // addReadingsBulk({
-        //   variables: {
-        //     readings: readingsArr,
-        //   },
-        // });
         const res = await axios.post("/meter-readings", readingsArr, {
           headers: {
             "Content-Type": "application/json",
@@ -79,14 +63,74 @@ const ReadingInput = () => {
 
         // res comes back with a success and a msg key
         if (res.data.success) {
-          alert(res.data.msg);
-          callConsumption();
+          confirmAlert({
+            overlayClassName: "alert-overlay",
+            onClickOutside: () => {
+              loadConsumption();
+              setMreadings([]);
+            },
+            customUI: ({ onClose }) => {
+              return (
+                <div className="card alert-card">
+                  <h1 className="text-center text-success">Success</h1>
+                  {res.data.msg}
+                  <button
+                    className="btn btn-outline-success"
+                    onClick={() => {
+                      loadConsumption();
+                      setMreadings([]);
+                      onClose();
+                    }}
+                  >
+                    OK
+                  </button>
+                </div>
+              );
+            },
+          });
         }
       }
     } catch (err) {
       console.log("Error in sending readings..\n", err);
     }
   };
+  const onChangeHandler = (e) => {
+    setMreadings({
+      ...mreadings,
+      [e.target.name]: e.target.value,
+    });
+  };
+  // _____GraphQL Query
+  const {
+    error: tError,
+    loading: tLoading,
+    data: tData,
+  } = useQuery(LOAD_TENANTS_FOR_READING_GQL);
+  const [loadConsumption, { error: cError }] = useLazyQuery(
+    LOAD_TENANTS_CONSUMPTION_GQL
+  );
+  let displayHouses;
+
+  if (tError) {
+    displayHouses = <p>Error in query</p>;
+  }
+  if (tLoading) {
+    displayHouses = <Spinner />;
+  }
+  if (tData) {
+    if (isEmpty(tData)) {
+      displayHouses = <p>Empty</p>;
+    } else {
+      const _houses = [].concat(tData.getAllActiveTenants);
+      displayHouses = _houses
+        .sort((a, b) => a.hseno - b.hseno)
+        .map((hse) => {
+          return (
+            <InputItem onChange={onChangeHandler} key={hse._id} house={hse} />
+          );
+        });
+    }
+  }
 
   return (
     <div className="col-md-2 bg-dark text-light py-2">
@@ -100,24 +144,7 @@ const ReadingInput = () => {
             </tr>
           </thead>
           <tbody>
-            {houses ? (
-              _houses
-                .sort((a, b) => a.hseno - b.hseno)
-                .map((hse) => {
-                  return (
-                    <InputItem
-                      onChange={onChangeHandler}
-                      key={hse._id}
-                      house={hse}
-                    />
-                  );
-                })
-            ) : (
-              <tr>
-                <td>No data</td>
-              </tr>
-            )}
-
+            {displayHouses}
             <tr>
               <td colspan="2">
                 <button className="btn btn-outline-success form-control">
@@ -132,4 +159,4 @@ const ReadingInput = () => {
   );
 };
 
-export default ReadingInput;
+export default MRSidebar;

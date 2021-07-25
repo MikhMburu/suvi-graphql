@@ -30,19 +30,18 @@ export const LOAD_FULL_TENANTS_GQL = gql`
 export const LOAD_TENANTS_CONSUMPTION_GQL = gql`
   query {
     getAllActiveTenants {
+      _id
       user {
         first_name
         other_names
+        email
+        phone
       }
       hseno
       current_mreading {
         reading
       }
       prev_mreading {
-        reading
-      }
-      meter_readings {
-        date
         reading
       }
     }
@@ -54,6 +53,30 @@ export const LOAD_TENANTS_FOR_READING_GQL = gql`
     getAllActiveTenants {
       _id
       hseno
+    }
+  }
+`;
+
+export const LOAD_ONE_TENANT = gql`
+  query getOneTenant($_id: String!) {
+    getOneTenant(_id: $_id) {
+      _id
+      user {
+        first_name
+        other_names
+        national_id
+        phone
+        email
+        next_of_kin {
+          name
+          phone
+          relation
+        }
+      }
+      rent
+      hseno
+      checkin
+      checkout
     }
   }
 `;
@@ -74,6 +97,18 @@ export const LOAD_HOUSES_GQL = gql`
         checkin
         checkout
       }
+    }
+  }
+`;
+
+export const LOAD_USERS_GQL = gql`
+  query {
+    getAllUsers {
+      _id
+      first_name
+      other_names
+      national_id
+      designation
     }
   }
 `;

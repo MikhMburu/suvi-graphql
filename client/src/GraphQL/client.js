@@ -1,4 +1,10 @@
-import { ApolloClient, InMemoryCache, HttpLink, from } from "@apollo/client";
+import {
+  ApolloClient,
+  InMemoryCache,
+  HttpLink,
+  from,
+  gql,
+} from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
 
 const errorLink = onError(({ graphqlErrors, networkError }) => {
@@ -15,10 +21,17 @@ const link = from([
     uri: "http://localhost:5000/graphql",
   }),
 ]);
+const typeDefs = gql`
+  extend type Reading {
+    tenant: String
+    date: String
+    reading: Float
+  }
+`;
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-
   link,
+  typeDefs,
 });
 
 export default client;

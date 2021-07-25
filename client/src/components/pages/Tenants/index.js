@@ -9,6 +9,7 @@ import { actionCreators } from "../../../redux/Actions";
 // Import components
 import Breadcrumbs from "../../layout/Breadcrumbs";
 import TenantContainer from "./TenantContainer";
+import TenantForm from "./TenantForm";
 import UserCard from "../../common/UserCard";
 import Spinner from "../../common/Spinner";
 
@@ -29,7 +30,10 @@ const Tenants = () => {
     <Fragment>
       <Breadcrumbs heading="Tenants" />
       <TenantContainer>
-        {loading ? (
+        <div className="col-md-6">
+          <TenantForm />
+        </div>
+        {/* {loading ? (
           <Spinner />
         ) : tenants.length === 0 ? (
           <h3 className="dispay-4 text-center text-black-50">
@@ -39,7 +43,7 @@ const Tenants = () => {
           tenants.map((tenant) => {
             return <UserCard key={tenant._id} tenant={tenant} />;
           })
-        )}
+        )} */}
       </TenantContainer>
     </Fragment>
   );

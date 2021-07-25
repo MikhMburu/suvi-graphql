@@ -14,6 +14,7 @@ import AddTenant from "./components/pages/AddTenant";
 import MeterReading from "./components/pages/MeterReading";
 import UserProfile from "./components/pages/UserProfile";
 import Houses from "./components/pages/Houses";
+import Invoice from "./components//pages/Invoice";
 
 function App() {
   return (
@@ -45,6 +46,9 @@ function App() {
           </Route>
           <Route path="/meter-reading">
             <MeterReading />
+          </Route>
+          <Route path="/invoice">
+            <Invoice />
           </Route>
         </Switch>
       </Router>

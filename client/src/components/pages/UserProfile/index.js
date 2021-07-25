@@ -1,9 +1,11 @@
 // Import Libraries
 import React, { Fragment, useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import { useQuery } from "@apollo/client";
+import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 // Import Files
+import { LOAD_ONE_TENANT } from "../../../GraphQL/Queries";
 import { actionCreators } from "../../../redux/Actions";
 // Import Components
 import BreadCrumbs from "../../layout/Breadcrumbs";
@@ -15,12 +17,18 @@ const UserProfile = () => {
   const dispatch = useDispatch();
   const { loadATenant } = bindActionCreators(actionCreators, dispatch);
   const { user } = useParams();
+  const { error, loading, data } = useQuery(LOAD_ONE_TENANT, {
+    variables: {
+      _id: user,
+    },
+  });
+  console.log(data);
   useEffect(() => {
-    if (user) {
-      loadATenant(user);
+    if (!loading) {
+      loadATenant(data.getOneTenant);
     }
     // eslint-disable-next-line
-  }, [user]);
+  }, [user, loading, data]);
 
   return (
     <Fragment>

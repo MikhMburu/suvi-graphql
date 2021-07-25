@@ -106,7 +106,15 @@ const Mutation = new GraphQLObjectType({
             });
             await newUser.save();
             const res = await newTenant.save();
-            return "New Tenant admitted";
+            await House.findOneAndUpdate(
+              { hseno: args.hseno },
+              {
+                $set: {
+                  occupied: true,
+                },
+              }
+            );
+            return res;
           }
         } catch (err) {
           console.log(err);
@@ -127,6 +135,15 @@ const Mutation = new GraphQLObjectType({
               $set: {
                 status: "departed",
                 checkout: moment().format("YYYY-MM-DD"),
+              },
+            },
+            { new: true }
+          );
+          await House.findOneAndUpdate(
+            { hseno: res.hseno },
+            {
+              $set: {
+                occupied: false,
               },
             },
             { new: true }

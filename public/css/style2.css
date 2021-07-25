@@ -1,0 +1,214 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap");
+html,
+body {
+  font-size: 1.2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+#invoice {
+  height: 297mm !important;
+  width: 210mm !important;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  border: 1px solid #c7c1c1;
+  padding: 15px;
+}
+
+#head {
+  min-height: 10%;
+  background: #7a7a7a;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#head h3 {
+  text-align: center;
+  margin: auto;
+  font-size: 2rem;
+  color: honeydew;
+}
+
+#body {
+  min-height: 80%;
+}
+
+#body h6 {
+  font-size: 1.6rem;
+  text-decoration: underline;
+  font-weight: bolder;
+  margin-top: 10px;
+  text-align: center;
+}
+
+#letter-head {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+#footer {
+  min-height: 10%;
+  color: honeydew;
+  background: #7a7a7a;
+}
+
+#recipient,
+#invoice-meta {
+  max-width: 35%;
+}
+
+#recipient span,
+#invoice-meta span {
+  display: block;
+  border-bottom: 1px solid rgba(240, 232, 232, 0.906);
+  padding-left: 5px;
+  font-family: "Oswald", sans-serif;
+  font-stretch: expanded;
+  font-weight: lighter;
+}
+
+#invoice-table {
+  margin-top: 16px;
+}
+
+#invoice-table .row {
+  border-bottom: 1px solid #f0e8e8e7;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+#invoice-table .row .col-6 {
+  min-width: 50%;
+  padding: 3px 0;
+}
+
+#invoice-table .row .col-2 {
+  min-width: 16.66%;
+  padding: 3px 0;
+}
+
+#table-header {
+  background: black;
+  color: aliceblue;
+  padding: 10px 5px 3px 5px;
+}
+
+#table-body {
+  padding: 10px 5px 3px 5px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-end {
+  text-align: end;
+}
+
+.fw-bold {
+  font-weight: bold;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+#summary {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-line-pack: justify;
+      align-content: space-between;
+  padding: 8px 5px;
+}
+
+#info {
+  min-width: 60%;
+  font-size: 1.2rem;
+  font-family: "Oswald", sans-serif;
+  color: rgba(0, 0, 0, 0.562);
+}
+
+#info span {
+  display: block;
+  padding-left: 10px;
+}
+
+#info h3 {
+  font-size: 1.6rem;
+  font-weight: bolder;
+  text-decoration: underline;
+  margin: 0 0 4px 0;
+}
+
+#info h4 {
+  font-size: 1.2rem;
+  padding: 0;
+  margin: 0;
+}
+
+#sum-total {
+  min-width: 40%;
+  margin-right: 0;
+  font-size: 1.4rem;
+}
+
+#sum-total .main {
+  text-decoration: underline;
+  font-size: 2rem;
+  padding: 5px 0;
+}
+
+.sum-total-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  min-width: 100%;
+  text-align: end;
+}
+
+.sum-total-item .col1 {
+  min-width: 60%;
+  font-weight: bolder;
+}
+
+.sum-total-item .col2 {
+  min-width: 40%;
+  border-bottom: 1px solid #f0e8e8e7;
+}
+
+@media print {
+  html,
+  body {
+    height: 297mm !important;
+    width: 210mm !important;
+  }
+}

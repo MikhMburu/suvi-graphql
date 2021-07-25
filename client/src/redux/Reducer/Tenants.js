@@ -14,9 +14,7 @@ const TenantReducer = (state = initialState, action) => {
     case SELECT_TENANT:
       return {
         ...state,
-        selectedTenant: state.tenants.filter(
-          (tenant) => tenant._id === action.payload
-        )[0],
+        selectedTenant: action.payload,
       };
     case CHECKOUT:
       return {

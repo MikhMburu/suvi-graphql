@@ -37,6 +37,20 @@ const RootQuery = new GraphQLObjectType({
         }
       },
     },
+    getOneTenant: {
+      type: TenantType,
+      description: "Get one tenant using id",
+      args: {
+        _id: { type: GraphQLString },
+      },
+      resolve: async (parent, { _id }) => {
+        let res;
+        if (_id) {
+          res = await Tenant.findById(_id).populate("user");
+          return res;
+        }
+      },
+    },
     getAllDepartedTenants: {
       type: new GraphQLList(TenantType),
       description:
@@ -68,7 +82,7 @@ const RootQuery = new GraphQLObjectType({
         if (_id) {
           res = await User.findById(_id);
           // User.collection.insert()
-          return res[0];
+          return res;
         }
       },
     },

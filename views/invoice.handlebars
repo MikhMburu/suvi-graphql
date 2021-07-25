@@ -1,0 +1,103 @@
+{{#each bills}}
+    <div class="container">
+      <div id="invoice">
+        <section id="head">
+          <h3 class="fw-bold text-white">SUNNYVIEW APARTMENTS</h3>
+        </section>
+        <section id="body">
+          <h6 class="text-center">WATER BILL</h6>
+          <div id="letter-head">
+            <div id="recipient">
+              <span class="fw-bold">{{this.tenant}}</span>
+              <span>Hse #{{this.hseno}}</span>
+              <span
+                ><i class="fas fa-envelope"></i>&nbsp;{{this.email}}</span
+              >
+              <span><i class="fas fa-phone"></i> &nbsp;{{this.phone}}</span>
+            </div>
+            <div id="invoice-meta">
+              <span class="fw-bold underline"> Invoice </span>
+              <span> Inv-number: #{{this._id}} </span>
+              <span> Issue Date: {{dateFormat ../inv_date 'Do MMM, YYYY'}}</span>
+            </div>
+          </div>
+          <div id="invoice-table" class="mt-1">
+            <div id="table-header">
+              <div class="row">
+                <div class="col-6">Description</div>
+                <div class="col-2 text-center">Units</div>
+                <div class="col-2 text-center">Unit Price</div>
+                <div class="col-2 text-center">Amount</div>
+              </div>
+            </div>
+            <div id="table-body" class="container">
+              <div class="row">
+                <div class="col-6">Balance b/f</div>
+                <div class="col-2">&nbsp;</div>
+                <div class="col-2">&nbsp;</div>
+                <div class="col-2 text-end">Ksh. 0</div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <span class="fw-bold underline">
+                    Readings for the month of {{dateFormat ../inv_date 'MMMM'}}
+                  </span>
+                </div>
+                <div class="col-2">&nbsp;</div>
+                <div class="col-2">&nbsp;</div>
+                <div class="col-2">&nbsp;</div>
+              </div>
+              <div class="row">
+                <div class="col-6 text-end">Previous reading</div>
+                <div class="col-2 text-center">{{this.prev_mreading}}</div>
+                <div class="col-2">&nbsp;</div>
+                <div class="col-2 text-end">&nbsp;</div>
+              </div>
+              <div class="row">
+                <div class="col-6 text-end">Current reading</div>
+                <div class="col-2 text-center">{{this.current_mreading}}</div>
+                <div class="col-2">&nbsp;</div>
+                <div class="col-2">&nbsp;</div>
+              </div>
+              <div class="row">
+                <div class="col-6 text-end">Consumption</div>
+                <div class="col-2 text-center">{{this.consumption}}</div>
+                <div class="col-2 text-end">100</div>
+                <div class="col-2 text-end">Ksh. {{this.amount_owed}}</div>
+              </div>
+            </div>
+          </div>
+          <div id="summary">
+            <div id="info">
+              <h3>Terms of payment</h3>
+              This invoice can be paid in two ways
+              <span
+                ><i class="fas fa-snowflake"></i> You can pay via mpesa</span
+              >
+              <span>
+                <i class="fas fa-snowflake"></i> You can pay via mpesa
+              </span>
+            </div>
+            <div id="sum-total">
+              <div class="sum-total-item">
+                <div class="col1">Sub Total</div>
+                <div class="col2">{{this.amount_owed}}</div>
+              </div>
+              <div class="sum-total-item">
+                <div class="col1">Other Charges</div>
+                <div class="col2">0</div>
+              </div>
+              <div class="sum-total-item main">
+                <div class="col1">Total</div>
+                <div class="col2">{{this.amount_owed}}</div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="footer">
+          <p class="text-center">Thank you for your business!</p>
+        </section>
+      </div>
+    </div>
+ 
+{{/each}}

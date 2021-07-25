@@ -75,7 +75,7 @@ export const stopLoadingConsumption = () => {
   };
 };
 
-export const checkout = (id) => {
+export const checkoutTnt = (id) => {
   return (dispatch) => {
     dispatch({
       type: CHECKOUT,

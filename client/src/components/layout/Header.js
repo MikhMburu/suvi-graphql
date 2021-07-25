@@ -47,7 +47,7 @@ const Header = () => {
             </li>
 
             <li>
-              <Link to="/login">
+              <Link to="/invoice">
                 <span className="bx bx-log-out"></span>
               </Link>
             </li>

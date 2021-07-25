@@ -7,19 +7,21 @@ import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import { CHECKOUT_TENANT } from "../../../GraphQL/Mutations";
 import Spinner from "../../common/Spinner";
+import isEmpty from "../../../utilities/isEmpty";
 
 const MainSection = () => {
   // ____GraphQL
   const [checkoutTenant, { error }] = useMutation(CHECKOUT_TENANT);
   // ____Redux
   const dispatch = useDispatch();
-  const { checkout } = bindActionCreators(actionCreators, dispatch);
+  const { checkoutTnt } = bindActionCreators(actionCreators, dispatch);
   const tenant = useSelector((state) => state.tenant.selectedTenant);
   if (!tenant) {
     return <Spinner />;
   }
   const {
     _id,
+    checkout,
     user: { first_name, other_names, national_id, email, phone, next_of_kin },
   } = tenant;
 
@@ -35,7 +37,7 @@ const MainSection = () => {
           label: "Yes",
           onClick: () => {
             checkoutTenant({ variables: { _id } });
-            checkout(_id);
+            checkoutTnt(_id);
           },
         },
         {
@@ -53,14 +55,22 @@ const MainSection = () => {
               <h6 className="mb-0">Full names</h6>
             </div>
             <div className="col-sm-6 text-secondary">{`${first_name} ${other_names}`}</div>
-            <div className="col-sm-3">
-              <button
-                className="btn btn-danger btn-block"
-                onClick={clickHandler}
-              >
-                Checkout
-              </button>
-            </div>
+            {checkout === null ? (
+              <div className="col-sm-3">
+                <button
+                  className="btn btn-danger btn-block"
+                  onClick={clickHandler}
+                >
+                  Checkout
+                </button>
+              </div>
+            ) : (
+              <div className="col-sm-3">
+                <button className="btn btn-info btn-block" disabled>
+                  Gone
+                </button>
+              </div>
+            )}
           </div>
           <hr />
           <div className="row">
@@ -98,12 +108,13 @@ const MainSection = () => {
             </div>
           </div>
           <hr />
+
           <div className="row">
             <div className="col-sm-3">
               <h6 className="mb-0">Next Of Kin</h6>
             </div>
             <div className="col-sm-9 text-secondary">
-              {next_of_kin ? (
+              {!isEmpty(next_of_kin.name) ? (
                 <table className="table">
                   <tbody>
                     <tr>

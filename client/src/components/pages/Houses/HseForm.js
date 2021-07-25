@@ -16,9 +16,7 @@ const HseForm = () => {
   const [addHouse, { error }] = useMutation(ADD_HOUSE_GQL, {
     refetchQueries: [{ query: LOAD_HOUSES_GQL }],
   });
-  // ____Redux
-  const dispatch = useDispatch();
-  const { refreshHouseList } = bindActionCreators(actionCreators, dispatch);
+
   // ____Define functions
   const submitHandler = (e) => {
     e.preventDefault();
@@ -33,7 +31,6 @@ const HseForm = () => {
     });
     setMtrno("");
     setHseno("");
-    refreshHouseList();
   };
   return (
     <form className="hse-form" onSubmit={submitHandler}>

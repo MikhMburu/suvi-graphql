@@ -16,7 +16,8 @@ import Tenancy from "../../common/form-items/Tenancy";
 const AddUser = () => {
   const [tenant, setTenant] = useState(null);
   // eslint-disable-next-line
-  const [createUserTenant, { error }] = useMutation(CREATE_TENANT_GQL);
+  const [createUserTenant, { loading: mutationLoading, error: mutationError }] =
+    useMutation(CREATE_TENANT_GQL);
   const onChangeHandler = (e) => {
     setTenant({ ...tenant, [e.target.name]: e.target.value });
   };
@@ -53,7 +54,10 @@ const AddUser = () => {
           nok_phone: nok_phoneno,
         },
       });
-      setTenant(null);
+      if (!mutationLoading) {
+        alert("Tenant successfully added");
+        setTenant(null);
+      }
     }
   };
   return (
