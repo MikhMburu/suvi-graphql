@@ -3,10 +3,12 @@ import {
   LOAD_CONSUMPTION,
   CALL_CONSUMPTION,
   STOP_LOADING,
+  LOAD_MRENTRY,
 } from "../types";
 const initialState = {
   callingConsumption: false,
   consumption: [],
+  selectedEntry: null,
   occupiedHouses: [],
 };
 
@@ -32,6 +34,13 @@ const MeterReadingReducer = (state = initialState, action) => {
       return {
         ...state,
         callingConsumption: false,
+      };
+    case LOAD_MRENTRY:
+      return {
+        ...state,
+        selectedEntry: state.consumption.filter(
+          (entry) => entry._id === action.payload
+        )[0],
       };
     default:
       return state;

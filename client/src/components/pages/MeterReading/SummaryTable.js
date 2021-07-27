@@ -1,26 +1,34 @@
 // Import Libraries
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { confirmAlert } from "react-confirm-alert";
+import { useDispatch, useSelector } from "react-redux";
+import { bindActionCreators } from "redux";
 import axios from "axios";
 import Moment from "react-moment";
 import moment from "moment";
 // Import files and functions
 import { LOAD_TENANTS_CONSUMPTION_GQL } from "../../../GraphQL/Queries";
+import { actionCreators } from "../../../redux/Actions";
 import isEmpty from "../../../utilities/isEmpty";
 // Import Components
 import SummaryTableItem from "./SummaryTableItem";
 import Spinner from "../../common/Spinner";
 
 const SummaryTable = () => {
-  const [consumption, setConsumption] = useState([]);
+  // ____Redux
+  const dispatch = useDispatch();
+  const { loadSummary } = bindActionCreators(actionCreators, dispatch);
+  const consumption = useSelector((state) => state.readings.consumption);
   // GraphQL query
   // eslint-disable-next-line
   const { error, loading, data } = useQuery(LOAD_TENANTS_CONSUMPTION_GQL);
   useEffect(() => {
     if (!loading) {
-      setConsumption(data.getAllActiveTenants);
+      // setConsumption(data.getAllActiveTenants);
+      loadSummary(data.getAllActiveTenants);
     }
+    // eslint-disable-next-line
   }, [data, loading]);
 
   const clickHandler = async (e) => {
@@ -44,6 +52,7 @@ const SummaryTable = () => {
       _tnt.tenant = tnt.user.first_name + " " + tnt.user.other_names;
       _tnt.hseno = tnt.hseno;
       _tnt.bal_bf = 0;
+      _tnt.other_charges = 0;
       if (tnt.current_mreading) {
         _tnt.current_mreading = tnt.current_mreading.reading.toFixed(2);
       } else {
@@ -151,6 +160,7 @@ const SummaryTable = () => {
             <th scope="col">Previous</th>
             <th scope="col">Current</th>
             <th scope="col">Consumption</th>
+            <th scope="col">&nbsp;</th>
           </tr>
         </thead>
         <tbody className="font-monospace">{displayData}</tbody>

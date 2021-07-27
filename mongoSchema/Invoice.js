@@ -40,6 +40,10 @@ const InvoiceSchema = new Schema({
       litres_consumed: {
         type: Number,
       },
+      other_charges: {
+        type: Number,
+        default: 0,
+      },
       amount_owed: {
         type: Number,
       },

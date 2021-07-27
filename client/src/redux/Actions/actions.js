@@ -9,6 +9,7 @@ import {
   STOP_LOADING,
   CHECKOUT,
   LOAD_HOUSEDETAILS,
+  LOAD_MRENTRY,
 } from "../types";
 
 // Define actions
@@ -55,6 +56,16 @@ export const loadSummary = (data) => {
     dispatch({
       type: LOAD_CONSUMPTION,
       payload: data,
+    });
+  };
+};
+
+// Load a single entry of the summary from Meter Reading
+export const loadMREntry = (id) => {
+  return (dispatch) => {
+    dispatch({
+      type: LOAD_MRENTRY,
+      payload: id,
     });
   };
 };

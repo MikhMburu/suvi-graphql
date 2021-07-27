@@ -8,12 +8,16 @@
   font-size: 0.85rem;
 }
 .hse-tenant {
-  box-shadow: 2px 5px #9ca1a5b9;
+  box-shadow: 1px 2px #9ca1a5b9;
   border-radius: 10px;
 }
-.hse-tenant .card-header {
-  background-image: linear-gradient(to bottom right, #fefefffb, #e7de62);
+.hse-tenant span {
+  display: block;
+  border-bottom: 1px solid #e0dcdc;
 }
+/* .hse-tenant .card-header {
+  background-image: linear-gradient(to bottom right, #06051d, #1e01a0);
+} */
 .hse-tenant .card-body {
   font-size: 0.75rem;
   color: #360411d9;
@@ -21,41 +25,4 @@
 .clickable,
 .nav-clickable {
   cursor: pointer;
-}
-.clickable:hover {
-  font-size: 1.1rem;
-  transition: font-size 0.1s;
-}
-.user-form,
-.tenant-form {
-  font-size: 0.85rem;
-  color: #747174;
-}
-.tenant-form input,
-.tenant-form select,
-.user-form input,
-.user-form select {
-  color: teal;
-}
-.alert-card {
-  font-size: 0.9rem;
-  min-width: 60%;
-  background: wheat;
-  padding: 2rem;
-  border-radius: 15px;
-}
-.alert-overlay {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #242222da;
-  /* opacity: 10%; */
-}
-.kin-toggler {
-  font-size: 0.6rem;
-  padding: 0.4rem;
-}
-.kin-toggler:hover {
-  background: #f7eb4b;
-  color: white;
 }

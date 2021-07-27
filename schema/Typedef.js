@@ -185,6 +185,59 @@ const HouseType = new GraphQLObjectType({
   }),
 });
 
+const InvoiceType = new GraphQLObjectType({
+  name: "Invoice",
+  description: "Invoice objects generated every month",
+  fields: () => ({
+    inv_date: { type: GraphQLString },
+    bills: { type: new GraphQLList(BillType) },
+  }),
+});
+
+const BillType = new GraphQLObjectType({
+  name: "Bill",
+  description: "The individual invoices for a particular month",
+  fields: () => ({
+    _id: {
+      type: GraphQLString,
+    },
+    phone: {
+      type: GraphQLString,
+    },
+    email: {
+      type: GraphQLString,
+    },
+
+    tenant: {
+      type: GraphQLString,
+    },
+    hseno: {
+      type: GraphQLInt,
+    },
+    bal_bf: {
+      type: GraphQLInt,
+    },
+    other_charges: {
+      type: GraphQLInt,
+    },
+    current_mreading: {
+      type: GraphQLFloat,
+    },
+    prev_mreading: {
+      type: GraphQLFloat,
+    },
+    consumption: {
+      type: GraphQLFloat,
+    },
+    litres_consumed: {
+      type: GraphQLInt,
+    },
+    amount_owed: {
+      type: GraphQLInt,
+    },
+  }),
+});
+
 // Export variables/functions
 module.exports = {
   UserType,
@@ -194,4 +247,5 @@ module.exports = {
   HouseType,
   MRInputType,
   UserInputType,
+  InvoiceType,
 };

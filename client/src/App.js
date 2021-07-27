@@ -34,7 +34,6 @@ function App() {
           <Route path="/users">
             <Users />
           </Route>
-
           <Route path="/add-user">
             <AddUsers />
           </Route>
@@ -44,10 +43,10 @@ function App() {
           <Route path="/houses">
             <Houses />
           </Route>
-          <Route path="/meter-reading">
+          <Route path="/mreading">
             <MeterReading />
           </Route>
-          <Route path="/invoice">
+          <Route path="/mreading/:id" exact>
             <Invoice />
           </Route>
         </Switch>

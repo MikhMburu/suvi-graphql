@@ -41,7 +41,7 @@ const Header = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/meter-reading" activeClassName="active">
+              <NavLink to="/mreading" activeClassName="active">
                 Water Bills
               </NavLink>
             </li>

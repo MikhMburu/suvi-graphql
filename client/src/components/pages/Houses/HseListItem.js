@@ -11,8 +11,8 @@ const HseListItem = ({ house, click }) => {
         className={classNames(
           "list-group-item d-flex          justify-content-between align-items-start mb-1",
           {
-            "bg-secondary text-light": occupied,
-            "bg-outline-danger text-black-50": !occupied,
+            "bg-dark text-light": occupied,
+            "bg-light text-black-50": !occupied,
           }
         )}
       >
@@ -25,9 +25,9 @@ const HseListItem = ({ house, click }) => {
           Meter no. #{kplc_no}
         </div>
         {occupied ? (
-          <span className="badge bg-success rounded-pill">occupied</span>
+          <i class="bx bxs-check-circle text-success">Occupied</i>
         ) : (
-          <span className="badge bg-danger rounded-pill">vacant</span>
+          <i className="bx bxs-minus-circle text-danger">Vacant</i>
         )}
       </li>
     );

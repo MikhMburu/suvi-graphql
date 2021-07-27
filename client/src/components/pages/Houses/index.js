@@ -4,7 +4,7 @@ import React, { Fragment } from "react";
 import Breadcrumbs from "../../layout/Breadcrumbs";
 import DashboardContainer from "../Dashboard/DashboardContainer";
 import HseSideBar from "./HseSideBar";
-import HseMainSection from "./HseMainSection";
+import HouseDetails from "./HouseDetails";
 
 const Houses = () => {
   return (
@@ -12,7 +12,7 @@ const Houses = () => {
       <Breadcrumbs heading="Houses" />
       <DashboardContainer>
         <HseSideBar />
-        <HseMainSection />
+        <HouseDetails />
       </DashboardContainer>
     </Fragment>
   );

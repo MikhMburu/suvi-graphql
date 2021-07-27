@@ -13,12 +13,14 @@ const {
   TenantType,
   HouseType,
   MRType,
+  InvoiceType,
 } = require("./Typedef");
 // Import MongoSchemas
 const User = require("../mongoSchema/User");
 const Tenant = require("../mongoSchema/Tenant");
 const House = require("../mongoSchema/House");
 const MeterReading = require("../mongoSchema/MeterReading");
+const Invoice = require("../mongoSchema/Invoice");
 
 const RootQuery = new GraphQLObjectType({
   name: "RootQuery",
@@ -109,6 +111,43 @@ const RootQuery = new GraphQLObjectType({
           },
         });
         return res;
+      },
+    },
+
+    // Invoices
+    getInvoices: {
+      type: new GraphQLList(InvoiceType),
+      description: "Get all invoices saved",
+      resolve: async (parent, args) => {
+        try {
+          const res = await Invoice.find();
+          return res;
+        } catch (err) {
+          console.log(err);
+        }
+      },
+    },
+    getOneInvoice: {
+      type: InvoiceType,
+      description: "An invoice gotten by id",
+      args: {
+        _id: { type: GraphQLString },
+        inv_date: { type: GraphQLString },
+      },
+      resolve: async (parent, args) => {
+        try {
+          let res;
+          if (args._id) {
+            res = await Invoice.findOne({ "bills._id": args._id });
+            return res;
+          }
+          if (args.inv_date) {
+            res = await Invoice.findOne({ inv_date: args.inv_date });
+            return res;
+          }
+        } catch (err) {
+          console.log(err);
+        }
       },
     },
   },

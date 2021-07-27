@@ -219,7 +219,12 @@ const TenantForm = () => {
               onClick={() => setShowNOK(!showNOK)}
             >
               <small className="d-block">Add Next-Of-Kin?</small>
-              <span className="small bx bx-plus"></span>
+              <span
+                className={classNames("small bx", {
+                  "bx-plus": !showNOK,
+                  "bx-minus": showNOK,
+                })}
+              ></span>
             </div>
           </div>
           <div

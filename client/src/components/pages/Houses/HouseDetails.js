@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import HseOccupant from "./HseOccupant";
 import Spinner from "../../common/Spinner";
+import Occupant from "./Occupant";
 
-const HseMainSection = () => {
+const HouseDetails = () => {
   const [hse, setHse] = useState(null);
   const hseDetails = useSelector((state) => state.house.selectedHouse);
   useEffect(() => {
@@ -18,20 +18,17 @@ const HseMainSection = () => {
   } else {
     return (
       <div className="col-md-7 p-3">
-        <h3 className="display-4 text-black-50">House {hse.hseno}</h3>
-        <h4 className="subheading font-monospace">
-          <span className="text-danger fw-bold">Mtr Number:</span> {hse.kplc_no}
-        </h4>
-        <p className="lead">
-          House is located on the ground floor to the right.
-        </p>
-        <h5 className="text-primary text-decoration-underline">Occupants</h5>
+        <h5 className="fw-bolder">House #{hse.hseno}</h5>
+        <h6 className="font-monospace">Meter Number: {hse.kplc_no}</h6>
+        <span className="text-decoration-underline text-primary fw-bold">
+          Occupants
+        </span>
         {hse.occupants.map((tenant, i) => (
-          <HseOccupant key={i} occupant={tenant} />
+          <Occupant key={i} occupant={tenant} />
         ))}
       </div>
     );
   }
 };
 
-export default HseMainSection;
+export default HouseDetails;
